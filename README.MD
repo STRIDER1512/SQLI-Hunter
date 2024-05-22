@@ -5,7 +5,7 @@
 - Clone the git repo
 
 ```
-git clone <repo_url>
+git clone https://github.com/STRIDER1512/SQLI-Hunter
 
 ```
 
