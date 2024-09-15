@@ -1,7 +1,6 @@
 #!/bin/sh
 
-# This script will find all the vulnerabilities in the DBMS Using SQLMAP and save them in a file called result.txt
-# We simply need to provide a URL to the script, and it will do the rest of the work.
+# This script will find all the vulnerabilities in the DBMS using SQLMAP and save them in a file called result.txt
 
 if ! [ -d "sqlmap" ]; then
     echo "Installing Dependencies..."
@@ -29,7 +28,7 @@ else
 fi
 
 case $url in
-    http://*|https://*)
+    http://|https://)
         ;;
     *)
         echo "Please provide a valid URL"
@@ -38,7 +37,7 @@ case $url in
 esac
 
 echo "Running SQLMAP on $url , please wait..."
-python3 sqlmap.py -u "$url" --batch --dbs --random-agent --level=5 --risk=3 --threads=5 --timeout=30 --tamper=space2comment > result.txt
+python3 sqlmap.py -u "$url" --batch --dbs --random-agent --level=5 --risk=3 --threads=1 --delay=5 --timeout=60 --dbms="MySQL" --tamper="space2comment,between" > result.txt
 mv result.txt ..
 
-echo "Vulnerability scan complete. Results saved in result.txt"
+echo "Vulnerability scan complete. Results saved in result.txt"
